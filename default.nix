@@ -25,7 +25,10 @@ let
           configureFlags = (drv.configureFlags or [ ]) ++ [
             "-f disable-default-paths"
           ];
-          extraLibraries = (drv.extraLibraries or [ ]) ++ [ pkgs.arrayfire ];
+          extraLibraries = (drv.extraLibraries or [ ]) ++ [
+            pkgs.arrayfire
+          ];
+          doCheck = false;
         });
     };
   };
@@ -35,16 +38,19 @@ let
       p."homing-pigeon"
     ];
     buildInputs = [
-      myHaskellPackages.haskell-language-server
+      # Haskell tools
       pkgs.haskellPackages.cabal-install
       pkgs.haskellPackages.ghcid
       pkgs.haskellPackages.fourmolu
       pkgs.haskellPackages.hlint
       pkgs.haskellPackages.hpack
-      #       pkgs.haskellPackages.arrayfire
-      # 
-      #       # Dependencies
-      #       pkgs.arrayfire
+
+      # Haskell overrides
+      myHaskellPackages.haskell-language-server
+      myHaskellPackages.arrayfire
+
+      # Non-Haskell Dependencies
+      pkgs.arrayfire
 
       # Nix tools
       pkgs.niv
