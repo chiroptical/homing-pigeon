@@ -16,12 +16,9 @@ let
       "arrayfire" =
         hself.callCabal2nix
           "arrayfire"
-          hself.haskellPackages.arrayfire
+          sources.arrayfire-haskell
           {
-            configureFlags = [
-              "--ghc-option=-flags=+disable-default-paths"
-              # Add arrayfire, opencl: --extra-include-dirs= --extra-lib-dirs=
-            ];
+            af = pkgs.arrayfire;
           };
     };
   };
