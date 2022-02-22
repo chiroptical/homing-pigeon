@@ -2,7 +2,7 @@
 
 let
   sources = import ./nix/sources.nix;
-  pkgs = import sources.nixpkgs {};
+  pkgs = import sources.nixpkgs { };
 
   gitignore = pkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
 
@@ -12,14 +12,21 @@ let
         hself.callCabal2nix
           "homing-pigeon"
           (gitignore ./.)
-          {};
+          { };
       "arrayfire" =
-        hself.callCabal2nix
+        let af = hself.callCabal2nix
           "arrayfire"
           sources.arrayfire-haskell
           {
             af = pkgs.arrayfire;
           };
+        in
+        pkgs.haskell.lib.overrideCabal af (drv: {
+          configureFlags = (drv.configureFlags or [ ]) ++ [
+            "-f disable-default-paths"
+          ];
+          extraLibraries = (drv.extraLibraries or [ ]) ++ [ pkgs.arrayfire ];
+        });
     };
   };
 
@@ -34,15 +41,14 @@ let
       pkgs.haskellPackages.fourmolu
       pkgs.haskellPackages.hlint
       pkgs.haskellPackages.hpack
-      pkgs.haskellPackages.arrayfire
-
-      # Dependencies
-      pkgs.arrayfire
+      #       pkgs.haskellPackages.arrayfire
+      # 
+      #       # Dependencies
+      #       pkgs.arrayfire
 
       # Nix tools
       pkgs.niv
       pkgs.nixpkgs-fmt
-
     ];
     withHoogle = true;
   };
