@@ -6,7 +6,7 @@ let
 
   gitignore = pkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
 
-  myArrayfire = pkgs.callPackage ./nix/arrayfire.nix {};
+  # myArrayfire = pkgs.callPackage ./nix/arrayfire.nix {};
 
   myHaskellPackages = pkgs.haskell.packages.${compiler}.override {
     overrides = hself: hsuper: {
@@ -53,7 +53,7 @@ let
       myHaskellPackages.arrayfire
 
       # Non-Haskell Dependencies
-      myArrayfire
+      pkgs.arrayfire
 
       # Nix tools
       pkgs.niv
@@ -63,6 +63,9 @@ let
       pkgs.cmake
     ];
     withHoogle = true;
+    shellHook = ''
+      export LD_LIBRARY_PATH=${pkgs.arrayfire}/lib:$LD_LIBRARY_PATH
+    '';
   };
 
   exe = pkgs.haskell.lib.justStaticExecutables (myHaskellPackages."homing-pigeon");

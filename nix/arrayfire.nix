@@ -1,9 +1,24 @@
 # Taken from https://github.com/arrayfire/arrayfire-haskell/blob/master/nix/default.nix
 # modified libGLU_combined to libGLU
-{ stdenv, fetchurl, fetchFromGitHub, cmake, pkgconfig
-, cudatoolkit_11_5, opencl-clhpp, ocl-icd, fftw, fftwFloat, mkl
-, blas, openblas, boost, mesa_noglu, libGLU
-, freeimage, python, lib
+{ stdenv
+, fetchurl
+, fetchFromGitHub
+, cmake
+, pkgconfig
+, cudatoolkit_11_5
+, opencl-clhpp
+, ocl-icd
+, fftw
+, fftwFloat
+, mkl
+, blas
+, openblas
+, boost
+, mesa_noglu
+, libGLU
+, freeimage
+, python
+, lib
 }:
 
 let
@@ -30,7 +45,8 @@ let
     sha256 = "1v4q0g6b6mwwsi0kn7kbjn749j3qafb9r4ld3zdq1163ln9cwnvw";
   };
 
-in stdenv.mkDerivation {
+in
+stdenv.mkDerivation {
   pname = "arrayfire";
   inherit version;
 
@@ -43,7 +59,7 @@ in stdenv.mkDerivation {
     "-DAF_BUILD_OPENCL=OFF"
     "-DAF_BUILD_EXAMPLES=OFF"
     "-DBUILD_TESTING=OFF"
-  ] ++ (lib.optional stdenv.isLinux ["-DCMAKE_LIBRARY_PATH=${cudatoolkit_11_5}/lib/stubs"]);
+  ] ++ (lib.optional stdenv.isLinux [ "-DCMAKE_LIBRARY_PATH=${cudatoolkit_11_5}/lib/stubs" ]);
 
   patches = [ ./no-download.patch ];
 
@@ -63,18 +79,25 @@ in stdenv.mkDerivation {
   enableParallelBuilding = true;
 
   buildInputs = [
-    cmake pkgconfig
-    opencl-clhpp fftw fftwFloat
-    mkl openblas
+    cmake
+    pkgconfig
+    opencl-clhpp
+    fftw
+    fftwFloat
+    mkl
+    openblas
     libGLU
-    mesa_noglu freeimage
-    boost.out boost.dev python
-    ] ++ (lib.optional stdenv.isLinux [ cudatoolkit_11_5 ocl-icd ]);
+    mesa_noglu
+    freeimage
+    boost.out
+    boost.dev
+    python
+  ] ++ (lib.optional stdenv.isLinux [ cudatoolkit_11_5 ocl-icd ]);
 
   meta = with lib; {
     description = "A general-purpose library that simplifies the process of developing software that targets parallel and massively-parallel architectures including CPUs, GPUs, and other hardware acceleration devices";
     license = licenses.bsd3;
-    homepage = https://arrayfire.com/ ;
+    homepage = https://arrayfire.com/;
     maintainers = with maintainers; [ chessai ];
     inherit version;
   };
