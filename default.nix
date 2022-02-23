@@ -6,6 +6,8 @@ let
 
   gitignore = pkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
 
+  myArrayfire = pkgs.callPackage ./nix/arrayfire.nix {};
+
   myHaskellPackages = pkgs.haskell.packages.${compiler}.override {
     overrides = hself: hsuper: {
       "homing-pigeon" =
@@ -18,6 +20,7 @@ let
           "arrayfire"
           sources.arrayfire-haskell
           {
+            # af = myArrayfire;
             af = pkgs.arrayfire;
           };
         in
@@ -50,11 +53,14 @@ let
       myHaskellPackages.arrayfire
 
       # Non-Haskell Dependencies
-      pkgs.arrayfire
+      myArrayfire
 
       # Nix tools
       pkgs.niv
       pkgs.nixpkgs-fmt
+
+      # Temporary
+      pkgs.cmake
     ];
     withHoogle = true;
   };
@@ -71,5 +77,6 @@ in
   inherit exe;
   inherit docker;
   inherit myHaskellPackages;
+  # inherit myArrayfire;
   "homing-pigeon" = myHaskellPackages."homing-pigeon";
 }
