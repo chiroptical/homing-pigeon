@@ -13,4 +13,7 @@ run: hpack
 test: hpack
 	cabal test
 
-.PHONY: build hpack format run test
+ghcid: hpack
+	ghcid -c 'cabal repl'
+
+.PHONY: build hpack format run test ghcid
