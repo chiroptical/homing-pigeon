@@ -4,7 +4,10 @@ build: hpack
 hpack:
 	hpack .
 
-format:
+nix-format:
+	nixpkgs-fmt .
+
+format: nix-format
 	find src/ app/ -name "*.hs" -exec fourmolu -i {} +
 
 run: hpack

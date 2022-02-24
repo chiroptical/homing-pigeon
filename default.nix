@@ -6,6 +6,7 @@ let
 
   gitignore = pkgs.nix-gitignore.gitignoreSourcePure [ ./.gitignore ];
 
+  # TODO: if we want CUDA/OpenCL support we need to get this working
   # myArrayfire = pkgs.callPackage ./nix/arrayfire.nix {};
 
   myHaskellPackages = pkgs.haskell.packages.${compiler}.override {
@@ -31,7 +32,11 @@ let
           extraLibraries = (drv.extraLibraries or [ ]) ++ [
             pkgs.arrayfire
           ];
+          # Note: I would prefer to do the 'preCheck' but the tests fail...
           doCheck = false;
+          # preCheck = ''
+          #   export LD_LIBRARY_PATH=${pkgs.arrayfire}/lib:$LD_LIBRARY_PATH
+          # '';
         });
     };
   };
