@@ -59,13 +59,11 @@ let
 
       # Non-Haskell Dependencies
       pkgs.arrayfire
+      pkgs.cmake
 
       # Nix tools
       pkgs.niv
       pkgs.nixpkgs-fmt
-
-      # Temporary
-      pkgs.cmake
     ];
     withHoogle = true;
     shellHook = ''
