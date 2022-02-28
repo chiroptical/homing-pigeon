@@ -6,20 +6,27 @@ let
     sha256 = "sha256-w/CLe6Z1L3Lc5qrlk6QlSt0xzs6Jp/+BSuQBAwQBR/w=";
   };
 
-  pytorch = pkgs.python39Packages.pytorch;
-
   ghc = pkgs.haskell.packages.ghc8107.extend (self: super: rec {
     libtorch-ffi-helper =
       self.callCabal2nix "libtorch-ffi-helper" "${hasktorch-git}/libtorch-ffi-helper" { };
 
     libtorch-ffi =
-      self.callCabal2nix "libtorch-ffi" "${hasktorch-git}/libtorch-ffi" {
-        c10 = pytorch;
-        torch = pytorch;
-        torch_cpu = pytorch;
+      let ffi = self.callCabal2nix "libtorch-ffi" "${hasktorch-git}/libtorch-ffi" {
+        c10 = pkgs.libtorch-bin;
+        torch = pkgs.libtorch-bin;
+        torch_cpu = pkgs.libtorch-bin;
       };
+      in
+      pkgs.haskell.lib.overrideCabal ffi (drv: {
+        extraLibraries = (drv.extraLibraries or [ ]) ++ [
+          "${pkgs.libtorch-bin}/lib"
+        ];
+        configureFlags = (drv.configureFlags or [ ]) ++ [
+          "--extra-include-dirs=${pkgs.libtorch-bin.dev}/include/torch/csrc/api/include"
+        ];
+      });
 
-    hasktorch = self.callCabal2nix "hasktorch" "${hasktorch-git}" { };
+    # hasktorch = self.callCabal2nix "hasktorch" "${hasktorch-git}" { };
   });
 
 in
