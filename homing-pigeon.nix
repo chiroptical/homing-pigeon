@@ -1,23 +1,8 @@
-{ pkgs, fetchgit, stdenv, fetchzip, ... }:
+{ pkgs, ... }:
 let
-  hasktorch-git = fetchgit {
-    url = "https://github.com/hasktorch/hasktorch";
-    rev = "5f97cd3fa1647092de85e4675aebdc3da1967098";
-    sha256 = "sha256-w/CLe6Z1L3Lc5qrlk6QlSt0xzs6Jp/+BSuQBAwQBR/w=";
-  };
+  hasktorch-git = pkgs.callPackage ./nix/hasktorch-git.nix {};
 
-  libtorch-bin =
-    let
-      version = "1.9.0";
-      srcs = import nix/libtorch-bin-hashes.nix version;
-      unavailable = throw "libtorch is not available for this platform";
-      # TODO: May want to support cuda in the future
-      device = "cpu";
-    in
-    pkgs.libtorch-bin.overrideAttrs (oldAttrs: {
-      inherit version;
-      src = fetchzip srcs."${stdenv.targetPlatform.system}-${device}" or unavailable;
-    });
+  libtorch-bin = pkgs.callPackage ./nix/libtorch-bin.nix {};
 
   ghc = pkgs.haskell.packages.ghc8107.extend (self: super: rec {
     libtorch-ffi-helper =
