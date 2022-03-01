@@ -8,8 +8,12 @@ category: ...
 license: BSD-3-Clause
 
 dependencies:
-  - base >=4.11 && < 5
-  - arrayfire
+- base >=4.11 && < 5
+- hasktorch
+
+default-extensions:
+- TypeApplications
+- ImportQualifiedPost
 
 library:
   source-dirs: src
