@@ -1,3 +1,4 @@
+# These are used to override the libtorch-bin sources, hasktorch requires 1.9.0 currently
 version: builtins.getAttr version {
   "1.9.0" = {
     x86_64-darwin-cpu = {
