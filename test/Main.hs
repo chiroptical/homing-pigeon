@@ -4,7 +4,7 @@ module Main where
 
 import Hedgehog
 import Hedgehog.Main
-import HomingPigeon
+import HomingPigeon (doHomingPigeon)
 
 prop_test :: Property
 prop_test = property $ do

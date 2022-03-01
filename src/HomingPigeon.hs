@@ -3,6 +3,9 @@ module HomingPigeon where
 import Control.Monad (when)
 import Torch
 
+doHomingPigeon :: String
+doHomingPigeon = "HomingPigeon"
+
 model :: Linear -> Tensor -> Tensor
 model state input = squeezeAll $ linear state input
 
