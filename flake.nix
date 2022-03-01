@@ -4,12 +4,6 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    hasktorch = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.utils.follows = "flake-utils";
-      url = "github:hasktorch/hasktorch";
-    };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:
