@@ -15,7 +15,7 @@ Read literature and write code for Quantum Theory applied in Chemistry
 
 ## Why homing-pigeon?
 
-Professor Autschbach gave me [sct][Schrodinger's Cat Trilogy] for completing my PhD studies.
+Professor Autschbach gave me [Schrodinger's Cat Trilogy][sct] for completing my PhD studies.
 The final book is called "The Homing Pigeons".
 
 [qtca]: https://www.amazon.com/Quantum-Theory-Chemical-Applications-Concepts/dp/0190920807

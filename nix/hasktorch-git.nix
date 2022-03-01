@@ -1,5 +1,5 @@
 { fetchgit, ... }:
- 
+
 fetchgit {
   url = "https://github.com/hasktorch/hasktorch";
   rev = "5f97cd3fa1647092de85e4675aebdc3da1967098";

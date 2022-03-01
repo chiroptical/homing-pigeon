@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
-  hasktorch-git = pkgs.callPackage ./nix/hasktorch-git.nix {};
+  hasktorch-git = pkgs.callPackage ./nix/hasktorch-git.nix { };
 
-  libtorch-bin = pkgs.callPackage ./nix/libtorch-bin.nix {};
+  libtorch-bin = pkgs.callPackage ./nix/libtorch-bin.nix { };
 
   ghc = pkgs.haskell.packages.ghc8107.extend (self: super: rec {
     libtorch-ffi-helper =
