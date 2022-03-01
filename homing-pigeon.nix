@@ -24,6 +24,7 @@ let
       self.callCabal2nix "libtorch-ffi-helper" "${hasktorch-git}/libtorch-ffi-helper" { };
 
     libtorch-ffi =
+      # Note: how do these work?
       let ffi = self.callCabal2nix "libtorch-ffi" "${hasktorch-git}/libtorch-ffi" {
         c10 = libtorch-bin;
         torch = libtorch-bin;
@@ -39,7 +40,7 @@ let
         ];
       });
 
-    # hasktorch = self.callCabal2nix "hasktorch" "${hasktorch-git}" {};
+    hasktorch = self.callCabal2nix "hasktorch" "${hasktorch-git}/hasktorch" { };
   });
 
 in
