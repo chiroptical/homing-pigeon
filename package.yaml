@@ -11,6 +11,10 @@ dependencies:
 - base >=4.11 && < 5
 - hasktorch
 
+default-extensions:
+- TypeApplications
+- ImportQualifiedPost
+
 library:
   source-dirs: src
 

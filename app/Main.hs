@@ -4,7 +4,7 @@
 module Main where
 
 import Control.Exception (catch)
-import HomingPigeon
+import HomingPigeon qualified as HP
 
 main :: IO ()
-main = pure ()
+main = HP.main

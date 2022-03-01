@@ -8,7 +8,7 @@ nix-format:
 	nixpkgs-fmt .
 
 format: nix-format
-	find src/ app/ -name "*.hs" -exec fourmolu -i {} +
+	find src/ app/ -name "*.hs" -exec fourmolu -o '-XTypeApplications' -o '-XImportQualifiedPost' -i {} +
 
 run: hpack
 	cabal run homing-pigeon-exe
