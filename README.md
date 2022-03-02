@@ -19,6 +19,23 @@ Read literature and write code for Quantum Theory applied in Chemistry
 
 - [Hasktorch][ht] functional differentiable programming, tensors, and linear algebra in Haskell
 
+## Build
+
+The only supported build path is through nix flakes
+
+### Using nix shell
+
+```
+> nix develop .
+nix> make build
+```
+
+### Using nix build
+
+```
+> nix build .#
+```
+
 ## Why homing-pigeon?
 
 Professor Autschbach gave me [Schrodinger's Cat Trilogy][sct] for completing my PhD studies.
