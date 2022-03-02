@@ -6,12 +6,18 @@ Read literature and write code for Quantum Theory applied in Chemistry
 
 ## Goals
 
-1. complete [Quantum Theory for Chemical Applications by Jochen Autschbach][qtca]
-2. complete [Molecular Electronic Structure Theory by Trygve Helgaker][mest]
+1. Complete [Quantum Theory for Chemical Applications (QTCA) by Jochen Autschbach][qtca]
+2. Complete [Molecular Electronic Structure Theory (MEST) by Trygve Helgaker][mest]
 
-## Tools
+## Plan
 
-- [Hasktorch][ht] functional differentiable programming in Haskell
+- [QTCA][qtca]
+  - [ ] Linear Algebra Essentials (Appendix B)
+  - [ ] Complete Part I 
+
+## Libraries
+
+- [Hasktorch][ht] functional differentiable programming, tensors, and linear algebra in Haskell
 
 ## Why homing-pigeon?
 
