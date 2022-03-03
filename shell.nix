@@ -1,4 +1,5 @@
-pkgs: pkgs.mkShell {
+pkgs:
+pkgs.mkShell {
   inputsFrom = [
     (import ./homing-pigeon.nix pkgs).env
   ];
@@ -12,6 +13,6 @@ pkgs: pkgs.mkShell {
     pkgs.haskellPackages.haskell-language-server
 
     # Nix tools
-    pkgs.nixpkgs-fmt
+    pkgs.alejandra
   ];
 }

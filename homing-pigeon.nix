@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
-  myHaskell = pkgs.callPackage ./nix/myHaskell.nix { };
+{pkgs, ...}: let
+  myHaskell = pkgs.callPackage ./nix/myHaskell.nix {};
 in
-myHaskell.callCabal2nix "homing-pigeon" ./. { }
+  myHaskell.callCabal2nix "homing-pigeon" ./. {}
