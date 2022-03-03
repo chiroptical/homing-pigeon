@@ -40,8 +40,8 @@ nix> make build
 
 ## Why homing-pigeon?
 
-Professor Autschbach gave me [Schrodinger's Cat Trilogy][sct] for completing my PhD studies.
-The final book is called "The Homing Pigeons".
+Professor Autschbach gave me [Schrodinger's Cat Trilogy][sct] as a gift for completing my PhD studies.
+The final book in the trilogy is called "The Homing Pigeons".
 
 [qtca]: https://www.amazon.com/Quantum-Theory-Chemical-Applications-Concepts/dp/0190920807
 [mest]: https://www.amazon.com/Molecular-Electronic-Structure-Theory-Trygve-Helgaker/dp/1118531477
