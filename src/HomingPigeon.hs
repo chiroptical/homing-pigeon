@@ -1,43 +1,49 @@
 module HomingPigeon where
 
-import Control.Monad (when)
-import Torch
+import Torch hiding (trace)
 
-doHomingPigeon :: String
-doHomingPigeon = "HomingPigeon"
+a :: Tensor
+a = asTensor @[[Float]] [[1, 2], [3, 4]]
 
-model :: Linear -> Tensor -> Tensor
-model state input = squeezeAll $ linear state input
+b :: Tensor
+b = asTensor @[[Float]] [[6, 0], [2, -1]]
 
-groundTruth :: Tensor -> Tensor
-groundTruth t = squeezeAll $ matmul t weight + bias
-  where
-    weight = asTensor ([42.0, 64.0, 96.0] :: [Float])
-    bias = full' [1] (3.14 :: Float)
+-- element-wise addition
+c :: Tensor
+c = a + b
 
-printParams :: Linear -> IO ()
-printParams trained = do
-  putStrLn $ "Parameters:\n" ++ show (toDependent $ weight trained)
-  putStrLn $ "Bias:\n" ++ show (toDependent $ bias trained)
+trace :: Tensor -> Tensor
+trace = sumAll . diag (Diag 0)
 
-main :: IO ()
-main = do
-  init <- sample $ LinearSpec{in_features = numFeatures, out_features = 1}
-  randGen <- defaultRNG
-  printParams init
-  (trained, _) <- foldLoop (init, randGen) numIters $ \(state, randGen) i -> do
-    let (input, randGen') = randn' [batchSize, numFeatures] randGen
-        (y, y') = (groundTruth input, model state input)
-        loss = mseLoss y y'
-    when (i `mod` 100 == 0) $ do
-      putStrLn $ "Iteration: " ++ show i ++ " | Loss: " ++ show loss
-    (newParam, _) <- runStep state optimizer loss 5e-3
-    pure (newParam, randGen')
-  printParams trained
-  pure ()
-  where
-    optimizer = GD
-    defaultRNG = mkGenerator (Device CPU 0) 31415
-    batchSize = 4
-    numIters = 2000
-    numFeatures = 3
+traceA :: Tensor -> Tensor
+traceA = sumAll . diag (Diag 1)
+
+d :: Tensor
+d = a * 2
+
+-- `tensor * tensor` is element-wise as well
+
+e :: Tensor
+e = matmul a b
+
+f :: Tensor
+f = matmul b a
+
+g :: Tensor
+g = asTensor @[[Float]] [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+-- pull the first value from the tensor
+-- useful when doing reductions
+traceToValue :: Tensor -> Float
+traceToValue = asValue . trace
+
+-- default: single dimension tensors are rows
+h :: Tensor
+h = asTensor @[Float] [1, 2]
+
+i :: Tensor
+i = asTensor @[[Float]] [[1, 2, 3], [4, 5, 6]]
+
+-- inverses in libtorch expect square inputs
+
+-- On orthogonality section

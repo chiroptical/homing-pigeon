@@ -1,10 +1,6 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeApplications #-}
-
 module Main where
 
-import Control.Exception (catch)
-import HomingPigeon qualified as HP
+import Example.Regression qualified as Regression
 
 main :: IO ()
-main = HP.main
+main = Regression.main
