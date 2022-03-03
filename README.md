@@ -4,6 +4,8 @@ Quantum Theory applied to Chemistry
 
 Read literature and write code for Quantum Theory applied in Chemistry
 
+[![Chiroptical](https://img.shields.io/badge/twitch.tv-chiroptical-purple?logo=twitch&style=for-the-badge)](https://twitch.tv/chiroptical)
+
 ## Goals
 
 1. Complete [Quantum Theory for Chemical Applications (QTCA) by Jochen Autschbach][qtca]
