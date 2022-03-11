@@ -1,8 +1,11 @@
 module HomingPigeon where
 
-import Torch (Tensor, asTensor, asValue)
+import Torch (Tensor, asTensor, asValue, defaultOpts)
+import Torch.DType (DType (..))
 import Torch.Functional
-import Torch.Functional.Internal (trace)
+import Torch.Functional.Internal (linalg_eig, linalg_solve, trace)
+import Torch.TensorFactories (eyeSquare)
+import Torch.TensorOptions (withDType)
 
 a :: Tensor
 a = asTensor @[[Float]] [[1, 2], [3, 4]]
@@ -92,6 +95,43 @@ o =
 p :: Tensor
 p = asTensor @[[Float]] [[1, 2], [3, 4]]
 
+-- Try to get a row and column from a tensor
+-- - `select 0` will get rows of 2d tensor
+-- - `select 1` will get columns of 2d tensor
+--
 -- Compute inverse of A in linear equation system with Hasktorch
+
+one_2 :: Tensor
+one_2 = eyeSquare 2 (withDType Float defaultOpts)
+
+one_3 :: Tensor
+one_3 = eyeSquare 3 (withDType Float defaultOpts)
+
+-- Basically, solving `A x = 1`, `x` will be the inverse of `A`.
+-- It only exists when `det A != 0`
+inverseOfP :: Tensor
+inverseOfP = linalg_solve p one_2
+
+-- This will fail because `det g == 0`
+inverseOfG :: Tensor
+inverseOfG = linalg_solve g one_3
+
 -- Try to solve the linear system Ax = b in Hasktorch
+q :: Tensor
+q = asTensor @[[Float]] [[1, 7], [-2, -9]]
+
+r :: Tensor
+r = asTensor @[Float] [4, 2]
+
+-- s ~ asTensor @[Float] [-10, 2]
+s :: Tensor
+s = linalg_solve q r
+
 -- Move onto Eigenvalues, Eigenvectors, and Functions of Matrices
+t :: Tensor
+t = asTensor @[[Float]] [[3, -2], [1, 0]]
+
+-- Note: `eig` is deprecated in favor of linalg_eig
+-- also, `eig` collects eigenvalues in the first column of the eigenvalue matrix for some reason
+diagonalizeT :: (Tensor, Tensor)
+diagonalizeT = linalg_eig t
