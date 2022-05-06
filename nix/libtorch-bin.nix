@@ -4,7 +4,7 @@
   fetchzip,
   ...
 }: let
-  version = "1.9.0";
+  version = "1.11.0";
   srcs = import ./libtorch-bin-hashes.nix version;
   unavailable = throw "libtorch is not available for this platform";
   # TODO: May want to support cuda in the future

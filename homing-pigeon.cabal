@@ -23,6 +23,7 @@ source-repository head
 
 library
   exposed-modules:
+      Example.Regression
       HomingPigeon
   other-modules:
       Paths_homing_pigeon

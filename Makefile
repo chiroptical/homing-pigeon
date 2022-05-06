@@ -5,7 +5,7 @@ hpack:
 	hpack .
 
 nix-format:
-	nixpkgs-fmt .
+	alejandra .
 
 format: nix-format
 	find src/ app/ -name "*.hs" -exec fourmolu -o '-XTypeApplications' -o '-XImportQualifiedPost' -i {} +
@@ -16,7 +16,12 @@ run: hpack
 test: hpack
 	cabal test
 
+repl: hpack
+	cabal repl
+
+ghci: repl
+
 ghcid: hpack
 	ghcid -c 'cabal repl'
 
-.PHONY: build hpack nix-format format run test ghcid
+.PHONY: build hpack nix-format format run test repl ghci ghcid
