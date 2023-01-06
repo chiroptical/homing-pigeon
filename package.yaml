@@ -8,7 +8,6 @@ default-extensions:
 - DeriveGeneric
 - ImportQualifiedPost
 - LambdaCase
-- NoImplicitPrelude
 - OverloadedStrings
 - RecordWildCards
 - TypeApplications
@@ -21,6 +20,8 @@ library:
   - -Wall
   - -fwarn-tabs
   - -O2
+  dependencies:
+  - massiv
 
 # Runnable executable for our application
 executables:
@@ -42,3 +43,4 @@ tests:
     ghc-options: -Wall
     dependencies:
     - homing-pigeon
+    - hspec

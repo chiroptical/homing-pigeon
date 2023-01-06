@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-
+{pkgs, ...}:
 pkgs.mkShell {
   inputsFrom = [
     (import ./homing-pigeon.nix pkgs).env
