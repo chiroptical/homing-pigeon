@@ -1,0 +1,44 @@
+name:    homing-pigeon
+version: "0.1.0"
+
+dependencies:
+- base >= 4.7 && < 5
+
+default-extensions:
+- DeriveGeneric
+- ImportQualifiedPost
+- LambdaCase
+- NoImplicitPrelude
+- OverloadedStrings
+- RecordWildCards
+- TypeApplications
+
+# The library contains all of our application code. The executable
+# defined below is just a thin wrapper.
+library:
+  source-dirs: src
+  ghc-options:
+  - -Wall
+  - -fwarn-tabs
+  - -O2
+
+# Runnable executable for our application
+executables:
+  homing-pigeon:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - homing-pigeon
+
+# Test suite
+tests:
+  homing-pigeon-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options: -Wall
+    dependencies:
+    - homing-pigeon
