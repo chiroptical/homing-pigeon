@@ -14,8 +14,11 @@ format-haskell:
 	find app/ src/ test/ -name "*.hs" -exec fourmolu -i {} +
 
 format-nix:
-	alejandra .
+	alejandra --quiet .
 
 format: format-nix format-haskell
 
-.PHONY: hpack build test run format-haskell format-nix format
+ghcid: hpack
+	ghcid -c cabal repl
+
+.PHONY: hpack build test run format-haskell format-nix format ghcid

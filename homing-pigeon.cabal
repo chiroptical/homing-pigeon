@@ -9,6 +9,8 @@ version:        0.1.0
 build-type:     Simple
 
 library
+  exposed-modules:
+      Tutorial
   other-modules:
       Paths_homing_pigeon
   hs-source-dirs:
@@ -43,6 +45,7 @@ executable homing-pigeon
   build-depends:
       base >=4.7 && <5
     , homing-pigeon
+    , massiv
   default-language: Haskell2010
 
 test-suite homing-pigeon-test
@@ -64,4 +67,5 @@ test-suite homing-pigeon-test
       base >=4.7 && <5
     , homing-pigeon
     , hspec
+    , massiv
   default-language: Haskell2010
