@@ -1,12 +1,14 @@
 module Tutorial where
 
-import Data.Massiv.Array
+import Numeric.LinearAlgebra
 
-vec :: Vector D Ix1
-vec = makeVectorR D Seq 10 id
+vec :: Vector R -- Real ~ Double
+vec = vector [1 .. 5]
 
-mat :: Array D Ix2 Int
-mat = makeArrayR D Seq (Sz (3 :. 5)) (\(i :. j) -> i * j)
+mat :: Matrix R
+mat = 2 >< 3 $ [1 ..] -- size is determined by (><) and requires a '[a]' to continue
 
-arr3 :: Array D Ix3 Int
-arr3 = makeArrayR D Seq (Sz (3 :> 2 :. 5)) (\(i :> j :. k) -> i * j + k)
+arr3 :: Matrix R
+arr3 =
+  -- makeArrayR D Seq (Sz (3 :> 2 :. 5)) (\(i :> j :. k) -> i * j + k)
+  build (3, 2) (\i j -> i * j)
