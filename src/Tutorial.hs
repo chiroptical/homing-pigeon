@@ -6,9 +6,12 @@ vec :: Vector R -- Real ~ Double
 vec = vector [1 .. 5]
 
 mat :: Matrix R
-mat = 2 >< 3 $ [1 ..] -- size is determined by (><) and requires a '[a]' to continue
+mat = (2 >< 3) [1 ..] -- size is determined by (><) and requires a '[a]' to complete
 
-arr3 :: Matrix R
-arr3 =
-  -- makeArrayR D Seq (Sz (3 :> 2 :. 5)) (\(i :> j :. k) -> i * j + k)
-  build (3, 2) (\i j -> i * j)
+squareMat :: Matrix R
+squareMat =
+  build (3, 3) (\i j -> i * j)
+
+complexMat :: Matrix (Complex Double)
+complexMat =
+  build (2, 4) (\a b -> a + b * iC)

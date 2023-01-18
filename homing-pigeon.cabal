@@ -10,6 +10,7 @@ build-type:     Simple
 
 library
   exposed-modules:
+      Numeric.Util
       Tutorial
   other-modules:
       Paths_homing_pigeon
