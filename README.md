@@ -1,3 +1,0 @@
-- [ ] Add some eigenvectors/eigenvalues examples
-- [ ] Add "-Wall -Werror" GHC_OPTIONS to make file
-- [ ] Add hlint make target

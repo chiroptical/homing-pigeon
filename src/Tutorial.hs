@@ -10,7 +10,7 @@ mat = (2 >< 3) [1 ..] -- size is determined by (><) and requires a '[a]' to comp
 
 squareMat :: Matrix R
 squareMat =
-  build (3, 3) (\i j -> i * j)
+  build (3, 3) (*)
 
 complexMat :: Matrix (Complex Double)
 complexMat =
