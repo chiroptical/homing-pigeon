@@ -15,3 +15,6 @@ squareMat =
 complexMat :: Matrix (Complex Double)
 complexMat =
   build (2, 4) (\a b -> a + b * iC)
+
+hermitianComplexMat :: Matrix (Complex Double)
+hermitianComplexMat = (2 >< 2) [3 + 0 * iC, 3 - 2 * iC, 3 + 2 * iC, 2 + 0 * iC]

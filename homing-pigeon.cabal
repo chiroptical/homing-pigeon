@@ -18,6 +18,7 @@ library
       src
   default-extensions:
       DeriveGeneric
+      DerivingStrategies
       ImportQualifiedPost
       LambdaCase
       OverloadedStrings
@@ -37,6 +38,7 @@ executable homing-pigeon
       app
   default-extensions:
       DeriveGeneric
+      DerivingStrategies
       ImportQualifiedPost
       LambdaCase
       OverloadedStrings
@@ -58,6 +60,7 @@ test-suite homing-pigeon-test
       test
   default-extensions:
       DeriveGeneric
+      DerivingStrategies
       ImportQualifiedPost
       LambdaCase
       OverloadedStrings

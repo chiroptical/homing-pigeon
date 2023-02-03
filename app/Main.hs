@@ -15,3 +15,6 @@ main = do
 
   print $ transpose complexMat
   print $ conjugateTranspose complexMat
+
+  let cm = classifyMatrix hermitianComplexMat
+  print $ eigen cm
